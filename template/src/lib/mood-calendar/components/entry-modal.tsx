@@ -1,7 +1,7 @@
 'use client';
 
 import { VoiceEntry } from '../lib/types';
-import { MOOD_COLORS } from '../lib/constants';
+import { MOOD_COLORS } from './mood-ring';
 
 
 interface EntryModalProps {

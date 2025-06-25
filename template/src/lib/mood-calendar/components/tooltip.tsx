@@ -1,5 +1,5 @@
 import { VoiceEntry } from '../lib/types';
-import { MOOD_COLORS } from '../lib/constants';
+import { MOOD_COLORS } from './mood-ring';
 
 interface TooltipProps {
   entry: VoiceEntry;
