@@ -13,6 +13,7 @@ export interface VoiceEntry {
   updated_at: string; // ISO timestamp
   emotion_score_score: number | null;
   embedding: number[] | null;
+  mood: string[];
 
   // Optional / extended columns in the real DB
   emotion_score_log?: string | null;

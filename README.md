@@ -1,5 +1,14 @@
 # 📦 Sentari Kit
 
+## How to run
+1. cd template
+2. pnpm install
+3. cd src/lib/mood-calendar
+4. npm install
+5. npm run dev
+
+***
+
 This folder contains **everything** a candidate needs to complete an interview task.
 
 Tech stack:
