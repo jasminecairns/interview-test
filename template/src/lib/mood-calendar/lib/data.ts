@@ -1,25 +1,29 @@
+// ./lib/data-loader.ts
+import 'server-only'; // This is the crucial line
+
 import fs from 'node:fs';
 import path from 'node:path';
 import Papa from 'papaparse';
 import { VoiceEntry } from './types';
 import { parseCustomDateString } from './utils';
 
-const csvPath = path.join(process.cwd(), 'data', 'Expanded_Diary_Entries.csv');
-
 interface RawCsvRow {
-  transcript_user: string;
   transcript_raw: string;
+  transcript_user: string;
   created_at: string;
-  mood: string;
   emotion_score_score: string;
+  mood: string;
 }
 
-function loadAndParseEntries(): VoiceEntry[] {
+// This function is now the single export from this file.
+export function loadMockEntries(): VoiceEntry[] {
+  const csvPath = path.join(process.cwd(), 'data', 'Expanded_Diary_Entries.csv');
+
   let rawCsvData: string;
   try {
     rawCsvData = fs.readFileSync(csvPath, 'utf8');
   } catch (error) {
-    console.error("🔴 Critical Error: Could not read CSV file during build.", error);
+    console.error("🔴 Data Loader Error: Could not read CSV.", error);
     return [];
   }
 
@@ -27,14 +31,13 @@ function loadAndParseEntries(): VoiceEntry[] {
     header: true,
     skipEmptyLines: true,
   });
-  
+
   const validData = (parsed.data as RawCsvRow[]).filter(row => row && row.created_at);
 
   const entries: VoiceEntry[] = validData.map((row, index): VoiceEntry => {
     const entryDate = parseCustomDateString(row.created_at);
-    
     const moods = row.mood ? row.mood.split(',').map((m: string) => m.trim()) : [];
-
+    
     return {
       id: String(index),
       user_id: 'mock',
@@ -56,5 +59,3 @@ function loadAndParseEntries(): VoiceEntry[] {
 
   return entries;
 }
-
-export const mockVoiceEntries: VoiceEntry[] = loadAndParseEntries();

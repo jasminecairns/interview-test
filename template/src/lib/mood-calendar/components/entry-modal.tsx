@@ -1,8 +1,7 @@
 'use client';
 
+import { MOOD_COLORS } from '../lib/constants';
 import { VoiceEntry } from '../lib/types';
-import { MOOD_COLORS } from './mood-ring';
-
 
 interface EntryModalProps {
   entry: VoiceEntry;
@@ -18,7 +17,6 @@ const EntryModal: React.FC<EntryModalProps> = ({ entry, onClose }) => {
     day: 'numeric',
   });
 
-  // Normalize `entry.mood` into a guaranteed array
   const moodsToDisplay = Array.isArray(entry.mood)
     ? entry.mood 
     : (entry.mood ? [entry.mood] : []);

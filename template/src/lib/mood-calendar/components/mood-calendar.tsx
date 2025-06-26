@@ -49,10 +49,14 @@ const MoodCalendar: React.FC<MoodCalendarProps> = ({ initialEntries }) => {
     for (let i = 0; i < startDayOfWeek; i++) {
       grid.push({ key: `empty-start-${i}`, isEmpty: true });
     }
+    let foundEntriesCount = 0; 
     for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(year, month, day);
+      const date = new Date(Date.UTC(year, month, day));
       const dateString = toYYYYMMDD(date);
       const entry = entriesByDate[dateString];
+      if (entry) {
+        foundEntriesCount++;
+      }
       grid.push({ key: dateString, date, entry });
     }
     const totalCells = grid.length;
@@ -109,7 +113,6 @@ const MoodCalendar: React.FC<MoodCalendarProps> = ({ initialEntries }) => {
       
       {hoveredEntry && (
         <div
-          // The conditional class is the key here.
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 transition-opacity duration-200 ease-in-out
             ${isTooltipVisible ? 'opacity-100' : 'opacity-0'}`
           }

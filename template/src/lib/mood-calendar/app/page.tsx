@@ -1,8 +1,8 @@
 import MoodCalendar from '../components/mood-calendar';
-import { mockVoiceEntries } from '../lib/mockData';
-
+import { loadMockEntries } from '../lib/data';
 
 export default async function HomePage() {
+  const entries = loadMockEntries();
 
   return (
     <main className="bg-gray-50 min-h-screen">
@@ -12,7 +12,7 @@ export default async function HomePage() {
           <p className="mt-2 text-lg text-gray-600">A visual journal of your emotional well-being.</p>
         </header>
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <MoodCalendar initialEntries={mockVoiceEntries} />
+          <MoodCalendar initialEntries={entries} />
         </div>
       </div>
     </main>
