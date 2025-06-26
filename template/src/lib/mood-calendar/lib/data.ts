@@ -1,5 +1,4 @@
-// ./lib/data-loader.ts
-import 'server-only'; // This is the crucial line
+import 'server-only'; // solves dev build issues
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -15,7 +14,6 @@ interface RawCsvRow {
   mood: string;
 }
 
-// This function is now the single export from this file.
 export function loadMockEntries(): VoiceEntry[] {
   const csvPath = path.join(process.cwd(), 'data', 'Expanded_Diary_Entries.csv');
 

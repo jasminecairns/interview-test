@@ -49,14 +49,10 @@ const MoodCalendar: React.FC<MoodCalendarProps> = ({ initialEntries }) => {
     for (let i = 0; i < startDayOfWeek; i++) {
       grid.push({ key: `empty-start-${i}`, isEmpty: true });
     }
-    let foundEntriesCount = 0; 
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(Date.UTC(year, month, day));
       const dateString = toYYYYMMDD(date);
       const entry = entriesByDate[dateString];
-      if (entry) {
-        foundEntriesCount++;
-      }
       grid.push({ key: dateString, date, entry });
     }
     const totalCells = grid.length;
